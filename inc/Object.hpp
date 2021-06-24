@@ -55,11 +55,16 @@ class Object : public Transform {
      void Save();
 
      /**
-      * @brief Number of Objects has been made.
+      * @brief Number of actual Objects
       */
      inline static std::size_t HMO = 0;
 
-     public:
+     /**
+      * @brief Number of all Objects has been made.
+      */
+     inline static std::size_t aHMO = 0;
+
+   public:
      /**
       * @brief Construct a new Object object
       * @param name of file in DATA_FOLDER and of Object

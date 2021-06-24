@@ -59,7 +59,11 @@ SceneObject("point.dat", position, scale, nullptr)
     this->animation.SetGoalOrientation(this->anglesRPY[2]);
 }
 
-Drone::~Drone() {}
+Drone::~Drone() {
+    for(auto &rotor: this->rotors)
+        Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + rotor->Name()).c_str());
+    Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + this->body->Name()).c_str());
+}
 
 void Drone::Forward(const double &length) {
     // std::cout << "KAT: " << this->anglesRPY[2] << std::endl;
@@ -197,13 +201,12 @@ void Drone::Update() {
 }
 void Drone::ChangeColor(const int &x){
     
-    Scene::api.UsunNazwePliku(this->body->Name());
+    Scene::api.UsunNazwePliku(std::string(TMP_FOLDER) + this->body->Name());
     PzG::InfoPlikuDoRysowania *wInfoPliku1 = &Scene::api.DodajNazwePliku((std::string(TMP_FOLDER) + this->body->Name()).c_str());
     wInfoPliku1->ZmienKolor(x);
     for(auto &rotor: this->rotors){
-        Scene::api.UsunNazwePliku(rotor->Name());
+        Scene::api.UsunNazwePliku((std::string(TMP_FOLDER) + rotor->Name()).c_str());
         wInfoPliku1 = &Scene::api.DodajNazwePliku((std::string(TMP_FOLDER) + rotor->Name()).c_str());
         wInfoPliku1->ZmienKolor(x);
     }
-   
 }

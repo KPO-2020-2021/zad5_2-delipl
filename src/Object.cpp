@@ -11,7 +11,7 @@
 
 Object::Object(const std::string name, const Vector3 &centerPosition,
                const Vector3 &scale, Transform *const &pin) :
-    Transform(pin), id{Object::HMO}, name{std::to_string(Object::HMO) + "_" + name} {
+    Transform(pin), id{Object::HMO}, name{std::to_string(Object::aHMO) + "_" + name} {
     this->lenPointsPack = 0;
     this->scale[0][0] = scale[0];
     this->scale[1][1] = scale[1];
@@ -44,6 +44,7 @@ Object::Object(const std::string name, const Vector3 &centerPosition,
     this->originPoints = this->actualPoints;
 
     ++Object::HMO;
+    ++Object::aHMO;
     // this->name = std::to_string(this->id) + "_" + name;
     this->UpdatePoints();
 }

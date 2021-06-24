@@ -108,7 +108,7 @@ int main() {
                                 << "\nrotation Matrix: \n"
                                 << drone->orientation;
                     }},
-                {"Add Scene Object: ",
+                   {"Add Scene Object: ",
                     [&scene]()
                     {
                         std::cout << "Choose type of object:" << std::endl;
@@ -139,24 +139,29 @@ int main() {
                         std::cout << menu1;
                         std::cin >> menu1;
                     }},
-                {"Remove Scene Object", [&scene]()
+                   {"Remove Scene Object", [&scene]()
                     {
                         std::vector<std::pair<std::string, std::function<void(void)>>> vec;
                         std::vector<std::function<void(void)>> lambdas;
                         for (std::size_t i = 0; i < scene.CountObjects(); ++i)
                         {
-                            lambdas.push_back([&scene, &i]()
-                                              { scene.Remove(i); });
+                            lambdas.push_back([&scene, i]()
+                                              {
+                                                  std::cout << "Usuwam" << scene[i]->Name()<< std::endl;
+                                                  scene.Remove(i);
+                                              });
                             std::stringstream ss;
                             ss << std::setw(15) << scene[i]->Name() << scene[i]->position;
-                            vec.push_back(std::pair<std::string, std::function<void(void)>>(ss.str(), lambdas.front()));
+                            vec.push_back(std::pair<std::string, std::function<void(void)>>(ss.str(), lambdas[i]));
                         }
                         Menu menu2(vec);
 
                         std::cout << menu2;
                         std::cin >> menu2;
+                        vec.clear();
+                        
                     }},
-                {"Choose active drone: ", [&drone, &scene]()
+                   {"Choose active drone: ", [&drone, &scene]()
                     {
                         // std::cout << "There are " << scene.CountObjects() << " on scene. Type number. 1 - n" << std::endl;
                         int d = 1;
@@ -179,7 +184,7 @@ int main() {
                         drone = std::dynamic_pointer_cast<Drone>(scene.SelectDrone(k));
                         drone->ChangeColor(2);
                     }},
-                {"Move drone", [&drone]()
+                   {"Move drone", [&drone]()
                     {
                         if (drone == nullptr)
                             throw std::logic_error("Did not choosed the active object.");
@@ -202,7 +207,7 @@ int main() {
 
                         drone->MakeRoute(pos[0], pos[1], pos[2]);
                     }},
-                {"Recognize flight", [&drone]()
+                   {"Recognize flight", [&drone]()
                     {
                         if (drone == nullptr)
                             throw std::logic_error("Did not choosed the active object.");
@@ -222,7 +227,7 @@ int main() {
 
                         // drone->MakeRoute(pos[0], pos[1], pos[2]);
                     }},
-                {"Exit", [&finish, &scene]()
+                   {"Exit", [&finish, &scene]()
                     {
                         finish = true;
                         throw std::logic_error("Exit");
@@ -258,7 +263,7 @@ int main() {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<int>().max(), '\n');
                     if(std::string(e.what()) == "Exit"){
-                        scene.~Scene();
+                        // scene.~Scene();
 
                         finish = true;
                     }else{
@@ -283,8 +288,8 @@ int main() {
         displaying.join();
         menuig.join();
 
-        displaying.~thread();
-        menuig.~thread();
+        // displaying.~thread();
+        // menuig.~thread();
     }
     std::cout << "===========================================" << std::endl;
     // Cos sie ze staticami dzieje

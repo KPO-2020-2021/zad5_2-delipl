@@ -10,6 +10,7 @@ Scene::~Scene(){
     // for (auto &obj : this->activeObjects)
     //     obj->~SceneObject();
     system("killall gnuplot  /usr/lib/gnuplot/gnuplot_qt");
+    // system("rm ./tmp/*");
 }
 
 void Scene::Add(const std::shared_ptr<SceneObject> &obj) {
@@ -18,10 +19,16 @@ void Scene::Add(const std::shared_ptr<SceneObject> &obj) {
 }
 
 void Scene::Remove(const std::size_t &ID){
+    std::cout << ID << "  " << this->activeObjects.size() << " Ma nazwe" <<  activeObjects[ID]->Name() << std::endl;
+
     if (ID >= this->activeObjects.size())
         throw std::overflow_error("There is no more objects");
-    // this->activeObjects.erase(this->activeObjects.begin() + ID);
+
     this->api.UsunNazwePliku(std::string(TMP_FOLDER + this->activeObjects[ID]->Name()).c_str());
+    if(ID == 0)
+        this->activeObjects.erase(this->activeObjects.begin());
+    else
+        this->activeObjects.erase(this->activeObjects.begin() + ID);
 }
 
 std::shared_ptr<SceneObject> &Scene::operator[](const std::size_t &i) {

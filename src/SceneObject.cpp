@@ -20,7 +20,10 @@ SceneObject::SceneObject(const std::string name, const Vector3 &centerPosition,
     this->shadowRadius = this->shadowRadius / 2;
 }
 
- SceneObject ::~SceneObject(){}
+ SceneObject ::~SceneObject(){
+    //  std::cout << "Dupa" << std::endl;
+    //  Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + this->Name()).c_str());
+ }
 void SceneObject::Draw() {
     Scene::Draw(this);
 }

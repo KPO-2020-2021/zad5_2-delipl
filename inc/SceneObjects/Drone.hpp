@@ -66,7 +66,7 @@ class Drone : public SceneObject {
     /**
      * @brief Destroy the Drone object
      */
-    ~Drone();
+    virtual ~Drone();
 
     /**
      * @brief Apply Update() for every SceneObject inside Drone
