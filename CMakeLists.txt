@@ -43,19 +43,12 @@ find_lto(CXX)
 # --------------------------------------------------------------------------------
 file(GLOB SOURCES "./src/*.cpp") # All .cpp files in src/
 file(GLOB SCENE_OBJECTS "./src/SceneObjects/*.cpp") # All .cpp files in src/
-# set(SOURCES ./src/Vectors.cpp 
-#             ./src/Matrixes.cpp
-#             ./src/Object.cpp
-#             ./src/SceneObject.cpp
-#             ./src/Drone.cpp
-
-#             ./src/GnuPlotApi.cpp
-#             ./src/Scene.cpp
-
-#             ./src/Menu.cpp 
-        
-            
-# )
+set(dupa ./src/Vectors.cpp 
+               
+)
+add_executable(dupakupa ./app/main.cpp      )
+# add_library(lol ./src/Vectors.cpp)
+target_include_directories(dupakupa PUBLIC ./prn ./inc ) 
 
 file(GLOB TEST_FILES ./tests/*.ut.cpp)       # All .cpp files in tests/
 

@@ -56,6 +56,6 @@ class Cuboid : public SceneObject {
     /**
      * @brief Drones can land on Cuboids
      */
-    virtual bool CanLand() override { return true; };
+    virtual bool CanLand() const override { return true; };
 };
 #endif // !CUBOID_HPP

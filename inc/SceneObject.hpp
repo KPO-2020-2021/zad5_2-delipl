@@ -36,6 +36,11 @@ class SceneObject : public Object {
     std::vector<Vector3> shadowZ;
 
     /**
+     * @brief radius of shadow
+     */
+    double shadowRadius;
+
+    /**
      * @brief Construct a new Scene Object object
      * 
      * @param name Name of SceneObject and .dat file.
@@ -76,7 +81,7 @@ class SceneObject : public Object {
      * @return true 
      * @return false 
      */
-    virtual bool CanLand() = 0;
+    virtual bool CanLand() const { return false; };
 
     /**
      * @brief One time draw SceneObject. If there is not any GNUPlot window this will create it.

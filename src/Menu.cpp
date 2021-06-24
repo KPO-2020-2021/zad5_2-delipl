@@ -7,6 +7,11 @@ Menu::Menu(std::initializer_list<std::pair<std::string, std::function<void(void)
         this->options.push_back(elem);
 }
 
+Menu::Menu(std::vector<std::pair<std::string, std::function<void(void)>>> list)
+{
+    for (auto &elem : list)
+        this->options.push_back(elem);
+}
 
 std::ostream &operator<<(std::ostream &strm, const Menu &menu){
     std::size_t i = 0;

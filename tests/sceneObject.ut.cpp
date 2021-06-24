@@ -1,6 +1,7 @@
 #include "config.hpp"
 #include "SceneObject.hpp"
 #include "Scene.hpp"
+#include "Peek.hpp"
 #include "doctest.h"
 
 extern bool DISPLAY;
@@ -88,4 +89,19 @@ TEST_CASE("4. Cuboid dims"){
     CHECK(c.dimentions == Vector3{1, 1, 1});
     Cuboid d({2, 2, 2});
     CHECK(d.dimentions == Vector3{2, 2, 2});
+}
+
+TEST_CASE("3. Print peek")
+{
+    Peek peek(Vector3(), 50, 120);
+    if (DISPLAY)
+    {
+        peek.Draw();
+        std::cout
+            << "Printing Peek" << std::endl;
+        std::cout << "Press Enter to continue..." << std::endl;
+
+        std::cin.ignore(std::numeric_limits<int>().max(), '\n');
+        Scene::ClearGNUPlot();
+    }
 }

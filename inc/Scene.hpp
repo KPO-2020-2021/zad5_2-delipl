@@ -55,6 +55,10 @@ class Scene {
      */
     void Add(const std::shared_ptr<SceneObject> &obj);
 
+    /**
+     * @brief Remove object which has ID index
+     * @param ID index of SceneObject on Scene
+     */
     void Remove(const std::size_t &ID);
 
     /**

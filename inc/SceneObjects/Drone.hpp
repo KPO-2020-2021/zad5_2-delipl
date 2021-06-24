@@ -76,7 +76,7 @@ class Drone : public SceneObject {
     /**
      * @brief Cannot land on Drone
      */
-    bool CanLand() override { return false; };
+    bool CanLand() const override { return false; };
 
     /**
      * @brief Go Drone forward.

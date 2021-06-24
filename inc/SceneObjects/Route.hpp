@@ -51,7 +51,7 @@ class Route : public SceneObject {
     /**
      * @brief SceneObjects can land on Route
      */
-    bool CanLand() override;
+    bool CanLand() const override { return true; }
 };
 
 #endif // !ROUTE_HPP

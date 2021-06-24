@@ -11,6 +11,7 @@
 
 #ifndef Terrain_HPP
 #define Terrain_HPP
+#include "Scene.hpp"
 #include "SceneObject.hpp"
 
 /**
@@ -23,6 +24,9 @@ class Terrain : public SceneObject {
    */
     Terrain() :
         SceneObject("surface.dat", {-300, -300, 0}, {4, 4, 4}) {
+        Scene::api.UsunNazwePliku(this->Name());
+        // PzG::InfoPlikuDoRysowania *wInfoPliku1 = &Scene::api.DodajNazwePliku((std::string(TMP_FOLDER) + this->Name()).c_str());
+        // wInfoPliku1->ZmienKolor(3);
     }
 
     /**
@@ -33,6 +37,6 @@ class Terrain : public SceneObject {
     /**
      * @brief Can land on surface.
      */
-    bool CanLand() override { return true; };
+    bool CanLand() const override { return true; };
 };
 #endif // !Terrain_HPP

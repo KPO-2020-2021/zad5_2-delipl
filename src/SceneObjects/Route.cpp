@@ -22,6 +22,3 @@ void Route::Update() {
     this->UpdatePoints();
 }
 
-bool Route::CanLand(){
-    return true;
-}

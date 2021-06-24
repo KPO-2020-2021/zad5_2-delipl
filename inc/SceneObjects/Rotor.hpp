@@ -60,7 +60,7 @@ class Rotor : public SceneObject {
     /**
      * @brief Cannot land on 
      */
-    bool CanLand() override { return false; };
+    bool CanLand() const override { return false; };
 };
 
 #endif // !ROTOR_HPP

@@ -17,6 +17,13 @@ void Scene::Add(const std::shared_ptr<SceneObject> &obj) {
     api.DodajNazwePliku(std::string(TMP_FOLDER + obj->Name()).c_str());
 }
 
+void Scene::Remove(const std::size_t &ID){
+    if (ID >= this->activeObjects.size())
+        throw std::overflow_error("There is no more objects");
+    // this->activeObjects.erase(this->activeObjects.begin() + ID);
+    this->api.UsunNazwePliku(std::string(TMP_FOLDER + this->activeObjects[ID]->Name()).c_str());
+}
+
 std::shared_ptr<SceneObject> &Scene::operator[](const std::size_t &i) {
     if(i >= this->activeObjects.size())
         throw std::overflow_error("There is no more objects");

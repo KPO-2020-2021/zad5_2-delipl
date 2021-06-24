@@ -54,6 +54,7 @@ public:
  
      }
 
+    
     /**
          * @brief Checks if every diffrence is bigger  than MIN_DIFF
          * @param v compared dVector
@@ -105,6 +106,8 @@ public:
                 return false;
         return true;
     }
+
+
 };
 
 /**
@@ -125,16 +128,16 @@ typedef dVector<2> Vector2;
 /**
  * @brief X axis Vector3 (1, 0, 0)
  */
-static Vector3 VectorX = {1, 0, 0};
+static dVector<3> VectorX = {1, 0, 0};
 
 /**
  * @brief Y axis Vector3 (0, 1, 0)
  */
-static Vector3 VectorY = {0, 1, 0};
+static dVector<3> VectorY = {0, 1, 0};
 
 /**
  * @brief Z axis Vector3 (0, 0, 1)
  */
-static Vector3 VectorZ = {0, 0, 1};
+static dVector<3> VectorZ = {0, 0, 1};
 
 #endif // __VECTORS_HPP__

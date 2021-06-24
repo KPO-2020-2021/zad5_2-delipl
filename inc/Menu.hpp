@@ -31,11 +31,12 @@ class Menu{
      */
     Menu(std::initializer_list<std::pair<std::string, std::function<void(void)>>> list);
 
+    Menu(std::vector<std::pair<std::string, std::function<void(void)>>> list);
 
     /**
      * @brief Choose options and do option
      */
-    void Choose() const; 
+    void Choose() const;
 };
 /**
  * @brief Print options for menu
