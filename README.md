@@ -11,7 +11,7 @@
 ## Budowanie
 
 ``` bash
-git clone https://github.com/KPO-2020-2021/zad5_1-delipl.git # Cloning repository
+git clone https://github.com/KPO-2020-2021/zad5_2-delipl.git # Cloning repository
 cd zad5_1-delipl
 
 mkdir lib/  # Download doctest lib
