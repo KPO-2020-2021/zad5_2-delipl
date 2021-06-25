@@ -16,8 +16,9 @@
  * @brief Peek obstacle
  * 
  */
-class Peek:public Cuboid{
-    public:
+class Peek : public Cuboid
+{
+public:
     /**
      * @brief Construct a new Peek object
      * 
@@ -27,7 +28,7 @@ class Peek:public Cuboid{
      */
     Peek(const Vector3 &position, const double &width, const double &lenght);
 
-    ~Peek(){}
+    virtual ~Peek() {}
 
     bool CanLand() const override{return false;}
 };

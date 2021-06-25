@@ -1,5 +1,10 @@
 #include "Scene.hpp"
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
 Scene::Scene(){
     api.ZmienTrybRys(PzG::TR_3D);
     api.Inicjalizuj();
@@ -19,16 +24,17 @@ void Scene::Add(const std::shared_ptr<SceneObject> &obj) {
 }
 
 void Scene::Remove(const std::size_t &ID){
-    std::cout << ID << "  " << this->activeObjects.size() << " Ma nazwe" <<  activeObjects[ID]->Name() << std::endl;
+    // std::cout << ID << "  " << this->activeObjects.size() << " Ma nazwe" <<  activeObjects[ID]->Name() << std::endl;
 
     if (ID >= this->activeObjects.size())
         throw std::overflow_error("There is no more objects");
 
-    this->api.UsunNazwePliku(std::string(TMP_FOLDER + this->activeObjects[ID]->Name()).c_str());
-    if(ID == 0)
-        this->activeObjects.erase(this->activeObjects.begin());
-    else
-        this->activeObjects.erase(this->activeObjects.begin() + ID);
+    // this->api.UsunNazwePliku(std::string(TMP_FOLDER + this->activeObjects[ID]->Name()).c_str());
+    // if(ID == 0)
+    //     this->activeObjects.erase(this->activeObjects.begin());
+    // else
+    // this->activeObjects[ID]->~SceneObject();
+    this->activeObjects.erase(this->activeObjects.begin() + ID);
 }
 
 std::shared_ptr<SceneObject> &Scene::operator[](const std::size_t &i) {
@@ -46,9 +52,7 @@ std::shared_ptr<SceneObject> Scene::operator[](const std::size_t &i) const {
 void Scene::Update(){   
     for (auto &obj : this->activeObjects)
         obj->Update();
-
-    if(this->activeObjects.size() != 0)
-        api.Rysuj();
+    api.Rysuj();
 }
 
 std::size_t Scene::CountObjects() const{
@@ -65,6 +69,14 @@ void Scene::Draw(SceneObject const *obj) {
 void Scene::AddToDrawable(SceneObject const *obj) {
     api.DodajNazwePliku((std::string(TMP_FOLDER + obj->Name()).c_str()));
     api.ZmienTrybRys(PzG::TR_3D);
+}
+
+void Scene::RemoveFromDrawable(SceneObject const *obj)
+{
+    // std::cout << "usuwam... ->   '" << (std::string(TMP_FOLDER + obj->Name()).c_str()) <<"'"<< std::endl;
+    api.UsunNazwePliku((std::string(TMP_FOLDER + obj->Name()).c_str()));
+    // usleep(2000000);
+    // api.Rysuj();
 }
 
 void Scene::ClearGNUPlot() {

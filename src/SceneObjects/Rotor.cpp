@@ -5,7 +5,9 @@ Rotor::Rotor(const SpinDirection_t &direction, const Vector3 &position, const Ve
     spinSpeed{100},
     spinDirection{direction} {}
 
-Rotor::~Rotor(){}
+Rotor::~Rotor(){
+    // std::cout << "Destruktor Rotora" << std::endl;
+}
 
 void Rotor::Update() {
     this->Rotate(this->spinSpeed * static_cast<int>(spinDirection), VectorZ);

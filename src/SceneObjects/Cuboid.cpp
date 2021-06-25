@@ -11,4 +11,6 @@ Cuboid::Cuboid(const Vector3 &dimentions, const Vector3 &position, Transform *co
     }
 }
 
-Cuboid::~Cuboid(){}
+Cuboid::~Cuboid() { 
+    // std::cout << "DESTRUKTOR CUBOIDA" <<std::endl;
+ }

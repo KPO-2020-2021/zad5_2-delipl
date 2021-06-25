@@ -54,15 +54,14 @@ SceneObject("point.dat", position, scale, nullptr)
     }
  
     this->Left(0);
+    // this->Forward(0);
     this->body->UpdatePoints();
     this->animation.SetGoalPosition(this->position);
     this->animation.SetGoalOrientation(this->anglesRPY[2]);
 }
 
 Drone::~Drone() {
-    for(auto &rotor: this->rotors)
-        Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + rotor->Name()).c_str());
-    Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + this->body->Name()).c_str());
+    // std::cout << "Destruktor Drona" << std::endl;
 }
 
 void Drone::Forward(const double &length) {

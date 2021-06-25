@@ -3,7 +3,8 @@
 #else
 #include <unistd.h>
 #endif
-
+#include <stdlib.h> /* srand, rand */
+#include <time.h>   /* time */
 #include <iostream>
 #include <limits>
 #include <thread>
@@ -11,6 +12,7 @@
 
 
 #include "config.hpp"
+#include "Plateau.hpp"
 #include "Terrain.hpp"
 #include "Peek.hpp"
 #include "Ridge.hpp"
@@ -31,6 +33,8 @@ enum Draw{
 
 int main() {
     {
+        /* initialize random seed: */
+        srand(time(NULL));
         bool finish = false;
         /* -------------------------------------------------------------------------- */
         /*                              INIT INFORMATIONS                             */
@@ -112,41 +116,50 @@ int main() {
                     [&scene]()
                     {
                         std::cout << "Choose type of object:" << std::endl;
-                        Menu menu1 = {{"Drone", [&scene]()
-                                    {
-                                        std::shared_ptr<Drone> tmp = std::make_shared<Drone>(Vector3());
-                                        scene.Add(std::move(tmp));
-                                    }},
-                                    {"Peek", [&scene]()
-                                    {
-                                        std::shared_ptr<Peek> tmp = std::make_shared<Peek>(Vector3({155, -100, 0}), 25, 20);
-                                        scene.Add(std::move(tmp));
-                                    }},
-                                    {"Ridge", [&scene]()
-                                    {
-                                        std::shared_ptr<Ridge> tmp = std::make_shared<Ridge>(Vector3({100, -150, 0}), 25, 20);
-                                        scene.Add(std::move(tmp));
-                                    }},
-                                    {"Plateau", [&scene]()
-                                    {
-                                        std::shared_ptr<Peek> tmp = std::make_shared<Peek>(Vector3({100, -100, 0}), 25, 20);
-                                        scene.Add(std::move(tmp));
-                                    }}
-                                    
-
+                        Vector3 pos =  {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+                        pos[0] *= rand()%2 ==0 ? -1: 1;
+                        pos[1] *= rand()%2 ==0 ? -1: 1;
+                        Menu menu1 = {{"Drone", [&scene, &pos]()
+                                       {
+                                           std::shared_ptr<Drone> tmp = std::make_shared<Drone>(pos);
+                                           scene.Add(std::move(tmp));
+                                       }},
+                                      {"Peek", [&scene, &pos]()
+                                       {
+                                           std::shared_ptr<Peek> tmp = std::make_shared<Peek>(pos, 40, 30);
+                                           scene.Add(std::move(tmp));
+                                       }},
+                                      {"Ridge", [&scene, &pos]()
+                                       {
+                                           std::shared_ptr<Ridge> tmp = std::make_shared<Ridge>(pos, 30, 40);
+                                           scene.Add(std::move(tmp));
+                                       }},
+                                      {"Plateau", [&scene, &pos]()
+                                       {
+                                           std::shared_ptr<Plateau> tmp = std::make_shared<Plateau>(pos, 35, 35);
+                                           scene.Add(std::move(tmp));
+                                       }}
 
                         };
                         std::cout << menu1;
                         std::cin >> menu1;
                     }},
-                   {"Remove Scene Object", [&scene]()
+                   {"Remove Scene Object", [&scene, &drone]()
                     {
+                        if(scene.CountObjects() == 0){
+
+                            std::cout << "There is no SceneObject on Scene" << std::endl;
+                            return;
+                        }
                         std::vector<std::pair<std::string, std::function<void(void)>>> vec;
                         std::vector<std::function<void(void)>> lambdas;
                         for (std::size_t i = 0; i < scene.CountObjects(); ++i)
                         {
-                            lambdas.push_back([&scene, i]()
-                                              {
+                            lambdas.push_back([&scene, i,&drone]()
+                                              { 
+                                                  if(drone == std::dynamic_pointer_cast<Drone>(scene[i])){
+                                                      drone.~__shared_ptr<Drone>();
+                                                  }
                                                   std::cout << "Usuwam" << scene[i]->Name()<< std::endl;
                                                   scene.Remove(i);
                                               });
@@ -232,11 +245,35 @@ int main() {
                         finish = true;
                         throw std::logic_error("Exit");
                     }}});
+        {
+            Vector3 pos = {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+            pos = {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+            pos[0] *= rand() % 2 == 0 ? -1 : 1;
+            pos[1] *= rand() % 2 == 0 ? -1 : 1;
 
-        scene.Add(std::move(std::make_shared<Drone>(Vector3({200, 200, 0}))));
-        // scene.Add(std::move(std::make_shared<Drone>(Vector3({200, -200, 0}))));
-        scene.Add(std::move(std::make_shared<Peek>(Vector3({200, -200, 0}), 50, 40)));
-        scene.Add(std::move(std::make_shared<Ridge>(Vector3(), 50.0, 40.0)));
+            std::shared_ptr<Plateau> tmp = std::make_shared<Plateau>(pos, 35, 35);
+            scene.Add(std::move(tmp));
+
+            pos = {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+            pos[0] *= rand() % 2 == 0 ? -1 : 1;
+            pos[1] *= rand() % 2 == 0 ? -1 : 1;
+            std::shared_ptr<Drone> tmp1 = std::make_shared<Drone>(pos);
+            scene.Add(std::move(tmp1));
+
+            pos = {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+            pos[0] *= rand() % 2 == 0 ? -1 : 1;
+            pos[1] *= rand() % 2 == 0 ? -1 : 1;
+            std::shared_ptr<Peek> tmp2 = std::make_shared<Peek>(pos, 40, 30);
+            scene.Add(std::move(tmp2));
+
+            pos = {double(rand() % 200 + 1), double(rand() % 200 + 1), 0};
+            pos[0] *= rand() % 2 == 0 ? -1 : 1;
+            pos[1] *= rand() % 2 == 0 ? -1 : 1;
+            std::shared_ptr<Ridge> tmp3 = std::make_shared<Ridge>(pos, 30, 40);
+            scene.Add(std::move(tmp3));
+        }
+        
+
         drone =  std::dynamic_pointer_cast<Drone>(scene.SelectDrone(1));
         drone->ChangeColor(2);
 
@@ -250,9 +287,8 @@ int main() {
                 std::cout << "===========================================" << std::endl;
                 std::cout << std::setw(35) << "Number of Vectors on Scene: " << std::setw(10) << Vector3::HowManyObjects() << std::endl;
                 std::cout << std::setw(35) << "Number of Vectors from start: " << std::setw(10) << Vector3::AllHowManyObjects() << std::endl;
-                std::cout << "===========================================" << std::endl
-                        << std::endl
-                        << std::endl;
+                std::cout << "===========================================" << std::endl;
+
                 std::cout << menu;
                 try {
                 

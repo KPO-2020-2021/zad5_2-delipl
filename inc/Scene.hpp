@@ -98,6 +98,13 @@ class Scene {
      */
     static void AddToDrawable(SceneObject const *obj);
 
+
+    /**
+     * @brief Disable printing object.
+     * @param obj Disabled object.
+     */
+    static void RemoveFromDrawable(SceneObject const *obj);
+
     /**
      * @brief ClearGNUPlot all GNUPlot memory. It removes all SceneObjects from GNUPlot but not from Scene.
      */

@@ -21,7 +21,7 @@
 /**
  * @brief Drawable and drivable Drone. 
  */
-class Drone : public SceneObject {
+class Drone : public SceneObject{
   private:
     /**
      * @brief Animation interface and properties
@@ -66,7 +66,7 @@ class Drone : public SceneObject {
     /**
      * @brief Destroy the Drone object
      */
-    virtual ~Drone();
+    /*virtual*/ ~Drone();
 
     /**
      * @brief Apply Update() for every SceneObject inside Drone

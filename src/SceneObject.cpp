@@ -22,7 +22,9 @@ SceneObject::SceneObject(const std::string name, const Vector3 &centerPosition,
 
  SceneObject ::~SceneObject(){
     //  std::cout << "Dupa" << std::endl;
-    //  Scene::api.UsunNazwePliku(std::string(TMP_FOLDER + this->Name()).c_str());
+    //  Scene::api.UsunNazwePliku((std::string(TMP_FOLDER) + this->Name()).c_str());
+    // std::cout << "Destruktor ObiektuSceny" << std::endl;
+    Scene::RemoveFromDrawable(this);
  }
 void SceneObject::Draw() {
     Scene::Draw(this);

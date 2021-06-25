@@ -16,8 +16,9 @@
  * @brief Ridge obstacle
  * 
  */
-class Ridge:public Cuboid{
-    public:
+class Ridge : public Cuboid
+{
+public:
     /**
      * @brief Construct a new Ridge object
      * 
@@ -29,7 +30,7 @@ class Ridge:public Cuboid{
 
         bool CanLand() const override {return false;}
 
-        ~Ridge() {}
+        virtual  ~Ridge() {}
 };
 
 #endif

@@ -8,8 +8,10 @@
 #else
 #include <unistd.h>
 #endif
-
+#include <memory>
 extern bool DISPLAY;
+
+
 TEST_CASE("6. Drow route"){
     Drone drone;
     if (DISPLAY) {
