@@ -1,13 +1,10 @@
 
-# Zadanie 5 Dron na Tytanie Faza 1
+# Zadanie 5 Dron na Tytanie Faza 2
 ## Wykonane zadania
-- Możliwość dodawania wielu dronów
-- Każdy element sceny animuje się jednocześnie
-- Każdy obiekt może poruszać się w tym samym czasie, czyli można ruszać kilkoma dronami na raz
-- Menu i wyświetlanie animacji jest stworzone na dwóch oddzielnych wątkach dlatego jest możliwość zadawania poleceń dronom podczas animacji
-- Zliczanie aktualnych i wszystkich Vector3 na scenie
-- Zmiana koloru aktywnego drona
-- Lot zwiadowsczy
+- Stworzenie 3 przeszkód
+- Możliwość tworzenia obiektów
+- Możliwość usuwania obiektów
+- Losowe położenie 
 
 ![Przepis na naleśniczki w Dron.cpp](./img/3drones.gif)
 
